@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PasteBin By Ziyang</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    a {
+      color: black;
+    }
+  </style>
+</head>
+
+<body>
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">PasteBin</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <form class="form-inline my-2 my-lg-0">
+        <div class="input-group">
+          <div class="input-group-prepend">
+            <span class="input-group-text" id="basic-addon3">https://pastebin.guoziyang.top/</span>
+          </div>
+          <input type="text" class="form-control" id="basic-url" placeholder="pasteId" aria-describedby="basic-addon3">
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="submit" id="button-addon2">前往</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </nav>
+  <div class="container-fluid" style="padding-top: 20px;">
+    <div class="row">
+      <div class="col-md-1 col-lg-2"></div>
+      <div class="col-md-10 col-lg-8">
+
+        
+
+      </div>
+      <div class="col-md-1 col-lg-2"></div>
+    </div>
+  </div>
+  <div class="fixed-bottom" style="background-color: #aaaaaa; height: 8%;">
+    <div class="container-fluid" style="text-align: center; color: black;">
+      <a href="https://blog.guoziyang.top">Ziyang's Blog</a> | <a href="https://github.com/cn-guoziyang">Github</a> | <a href="http://beian.miit.gov.cn/">苏ICP备20004712号</a>
+      <br>
+      Copyright © 2018 - <span id="year"></span> <a href="mailto:guoziyang0033@gmail.com">Ziyang</a>
+      <script>
+        var date = new Date()
+        var year = date.getFullYear()
+        document.getElementById("year").innerText=year
+      </script>
+    </div>
+  </div>
+
+</body>
+
+</html>
