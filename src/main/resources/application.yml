@@ -1,9 +1,13 @@
 server:
   port: 8080
+  ssl:
+    enabled: true
+    key-store: classpath:guoziyang.top.jks
+    key-store-password: xxx
 spring:
   data:
     mongodb:
-      host: localhost
+      host: 192.168.31.211
       port: 27017
       database: pastebin
       username: pastebin
