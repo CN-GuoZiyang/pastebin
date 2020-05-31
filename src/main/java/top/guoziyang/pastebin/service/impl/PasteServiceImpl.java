@@ -76,4 +76,9 @@ public class PasteServiceImpl implements PasteService {
         return pasteDto;
     }
 
+    @Override
+    public void deletePasteDo(PasteDo pasteDo) {
+        mongoTemplate.remove(pasteDo);
+    }
+
 }

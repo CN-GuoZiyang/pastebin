@@ -10,4 +10,3 @@ spring:
       password: pastebin
   thymeleaf:
     mode: LEGACYHTML5
-    cache: false

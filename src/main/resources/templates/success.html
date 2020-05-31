@@ -65,7 +65,7 @@
           </P>
           <ul>
             <li>在导航栏中输入索引</li>
-            <li>在浏览器中直接访问 <a th:href="@{/ + ${pasteId}}"><span th:text="${#httpServletRequest.getRequestURL().substring(0, #httpServletRequest.getRequestURL().lastIndexOf(#httpServletRequest.getRequestURI()))}+ '/'+ ${pasteId}"></span></a></li>
+            <li>在浏览器中直接访问 <a th:href="@{'/' + ${pasteId}}"><span th:text="${#httpServletRequest.getRequestURL().substring(0, #httpServletRequest.getRequestURL().lastIndexOf(#httpServletRequest.getRequestURI()))}+ '/'+ ${pasteId}"></span></a></li>
           </ul>
           <p>
             <button class="btn btn-primary" id="back-index">返回首页</button>
