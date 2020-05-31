@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
 
 <head>
   <meta charset="UTF-8">
@@ -18,7 +18,7 @@
 <body>
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="#">PasteBin</a>
+    <a class="navbar-brand" th:href="@{/}">PasteBin</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
       aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -27,12 +27,18 @@
       <form class="form-inline my-2 my-lg-0">
         <div class="input-group">
           <div class="input-group-prepend">
-            <span class="input-group-text" id="basic-addon3">https://pastebin.guoziyang.top/</span>
+            <span class="input-group-text" id="basic-addon3" th:text="${#httpServletRequest.getRequestURL().substring(0, #httpServletRequest.getRequestURL().lastIndexOf(#httpServletRequest.getRequestURI()))}+'/'"></span>
           </div>
           <input type="text" class="form-control" id="basic-url" placeholder="pasteId" aria-describedby="basic-addon3">
           <div class="input-group-append">
-            <button class="btn btn-primary" type="submit" id="button-addon2">前往</button>
+            <button class="btn btn-primary" type="button" id="button-go">前往</button>
           </div>
+          <script>
+            $("#button-go").click(function () {
+              let baseUrl = document.getElementById("basic-url").value;
+              window.location.href = document.getElementById("basic-addon3").innerText + baseUrl
+            })
+          </script>
         </div>
       </form>
     </div>
@@ -42,7 +48,7 @@
       <div class="col-md-1 col-lg-2"></div>
       <div class="col-md-10 col-lg-8">
 
-        <form>
+        <form method="post" th:action="@{/}">
           <div class="row">
             <div class="col-md-7 col-lg-5">
               <div class="form-group">
@@ -50,7 +56,7 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon1">高亮</span>
                   </div>
-                  <select class="custom-select" id="inlineFormCustomSelect" aria-describedby="basic-addon1">
+                  <select name="type" class="custom-select" id="inlineFormCustomSelect" aria-describedby="basic-addon1">
                     <option value="PlainText" selected>纯文本</option>
                     <option value="Cpp">C/C++</option>
                     <option value="Java">Java</option>
@@ -67,7 +73,19 @@
                   <div class="input-group-prepend">
                     <span class="input-group-text" id="basic-addon2">密码</span>
                   </div>
-                  <input type="text" class="form-control" placeholder="无密码请留空" aria-describedby="basic-addon2">
+                  <input name="password" type="text" class="form-control" placeholder="无密码请留空" aria-describedby="basic-addon2">
+                </div>
+              </div>
+              <div class="form-group">
+                <div class="input-group">
+                  <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon5">过期</span>
+                  </div>
+                  <select name="expire" class="custom-select" id="inlineFormCustomSelect5" aria-describedby="basic-addon5">
+                    <option value="day" selected>一天</option>
+                    <option value="week">一周</option>
+                    <option value="month">一月</option>
+                  </select>
                 </div>
               </div>
             </div>
@@ -75,12 +93,12 @@
           <div class="row">
             <div class="col-md-12">
               <div class="form-group">
-                <textarea placeholder="整点啥" required="required" rows="10" wrap="soft" aria-required="true" class="form-control" style="resize: none;"></textarea>
+                <textarea name="content" placeholder="整点啥" required="required" rows="10" wrap="soft" aria-required="true" class="form-control" style="resize: none;"></textarea>
               </div>
               <div class="form-group">
                 <button type="submit" class="btn btn-primary" style="margin-right: 0.7em;">保存</button>
                 <div class="custom-control-inline custom-switch">
-                  <input type="checkbox" class="custom-control-input" id="customSwitch1">
+                  <input name="burn" type="checkbox" class="custom-control-input" id="customSwitch1">
                   <label class="custom-control-label" for="customSwitch1">阅后即焚</label>
                 </div>
               </div>

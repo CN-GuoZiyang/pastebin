@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8080
 spring:
   data:
     mongodb:
@@ -8,3 +8,6 @@ spring:
       database: pastebin
       username: pastebin
       password: pastebin
+  thymeleaf:
+    mode: LEGACYHTML5
+    cache: false

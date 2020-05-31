@@ -25,6 +25,7 @@ public class PasteController {
 
     @PostMapping("/")
     public String postPaste(PostPasteVo pasteVo, Model model) {
+        System.out.println(pasteVo);
         String pasteId = pasteService.postPaste(pasteVo);
         model.addAttribute("pasteId", pasteId);
         return "success";

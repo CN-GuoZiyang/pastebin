@@ -4,6 +4,7 @@ import io.seruco.encoding.base62.Base62;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.stereotype.Service;
 import top.guoziyang.pastebin.entity.PasteDo;
 import top.guoziyang.pastebin.entity.PasteDto;
 import top.guoziyang.pastebin.entity.PostPasteVo;
@@ -14,6 +15,7 @@ import javax.annotation.Resource;
 import java.util.Calendar;
 import java.util.Date;
 
+@Service
 public class PasteServiceImpl implements PasteService {
 
     @Resource
@@ -51,7 +53,7 @@ public class PasteServiceImpl implements PasteService {
             pasteDo.setNeedPass(true);
             pasteDo.setPassword(pasteVo.getPassword());
         }
-        pasteDo.setBurn("true".equals(pasteVo.getBurn()));
+        pasteDo.setBurn("on".equals(pasteVo.getBurn()));
         pasteDo.setType(Type.valueOf(pasteVo.getType()));
         pasteDo.setContent(pasteVo.getContent());
         mongoTemplate.insert(pasteDo);
