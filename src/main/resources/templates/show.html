@@ -8,9 +8,19 @@
   <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
   <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+  <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.0.3/styles/docco.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/highlightjs-line-numbers.js@2.6.0/dist/highlightjs-line-numbers.min.js"></script>
   <style>
     a {
       color: black;
+    }
+    .hljs-ln-numbers {
+      color: #ccc;
+      text-align: center;
+    }
+    .hljs-ln td {
+      padding-left: 1em
     }
   </style>
 </head>
@@ -39,20 +49,45 @@
   </nav>
   <div class="container-fluid" style="padding-top: 20px;">
     <div class="row">
-      <div class="col-md-1 col-lg-2"></div>
-      <div class="col-md-10 col-lg-8">
+      <div class="col-md-1"></div>
+      <div class="col-md-10">
 
-        
+        <div class="card">
+          <div class="card-header">
+            <div class="row">
+              <div class="col-md-6">Java</div>
+              <div class="col-md-6" style="text-align: right;">复制</div>
+            </div>
+          </div>
+          <div class="card-body" style="padding: 0px;">
+            <pre style="margin-bottom: 0;">
+              <code class="java" style="background-color: #fff;">public class PasteDo {
+ 
+  @Id
+  private String id;
+  private Date createTime;
+  private Date expireTime;
+  private Boolean needPass;
+  private String password;
+  private Boolean burn;
+  private Type type;
+  private String content;
+
+}
+              </code>
+            </pre>
+          </div>
+        </div>
 
       </div>
-      <div class="col-md-1 col-lg-2"></div>
+      <div class="col-md-1"></div>
     </div>
   </div>
-  <div class="fixed-bottom" style="background-color: #aaaaaa; height: 8%;">
+  <div  style="background-color: #aaaaaa; height: 8%; margin-top: 30px;">
     <div class="container-fluid" style="text-align: center; color: black;">
       <a href="https://blog.guoziyang.top">Ziyang's Blog</a> | <a href="https://github.com/cn-guoziyang">Github</a> | <a href="http://beian.miit.gov.cn/">苏ICP备20004712号</a>
       <br>
-      Copyright © 2018 - <span id="year"></span> <a href="mailto:guoziyang0033@gmail.com">Ziyang</a>
+      Copyright © 2020 - <span id="year"></span> <a href="mailto:guoziyang0033@gmail.com">Ziyang</a>
       <script>
         var date = new Date()
         var year = date.getFullYear()
@@ -62,5 +97,9 @@
   </div>
 
 </body>
+<script>
+  hljs.initHighlightingOnLoad();
+  hljs.initLineNumbersOnLoad();
+</script>
 
 </html>
