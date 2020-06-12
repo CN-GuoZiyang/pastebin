@@ -5,10 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import top.guoziyang.pastebin.entity.PasteDto;
-import top.guoziyang.pastebin.entity.PostPasswordVo;
-import top.guoziyang.pastebin.entity.PostPasteVo;
-import top.guoziyang.pastebin.entity.ShowPasteVo;
+import top.guoziyang.pastebin.entity.*;
 import top.guoziyang.pastebin.service.PasteService;
 
 import javax.annotation.Resource;
@@ -46,7 +43,11 @@ public class PasteController {
             pasteService.deletePasteDo(dto.getPasteDo());
         }
         model.addAttribute("paste", pasteVo);
-        return "show";
+        if(pasteVo.getType().equals("Markdown")) {
+            return "markdown";
+        } else {
+            return "show";
+        }
     }
 
     @PostMapping("/{pasteId}")
@@ -62,7 +63,11 @@ public class PasteController {
                 pasteService.deletePasteDo(dto.getPasteDo());
             }
             model.addAttribute("paste", pasteVo);
-            return "show";
+            if(pasteVo.getType().equals("Markdown")) {
+                return "markdown";
+            } else {
+                return "show";
+            }
         }
         return "password";
     }

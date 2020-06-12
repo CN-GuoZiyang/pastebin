@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PasteBin By Ziyang</title>
+    <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+    <link href="https://cdn.bootcdn.net/ajax/libs/highlight.js/10.0.3/styles/docco.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcdn.net/ajax/libs/highlightjs-line-numbers.js/2.7.0/highlightjs-line-numbers.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/clipboard.js/2.0.6/clipboard.min.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/markdown-it/11.0.0/markdown-it.min.js"></script>
+    <link href="github.css" rel="stylesheet"></link>
+    <style>
+        a {
+            color: black;
+        }
+
+        .hljs-ln-numbers {
+            color: #ccc;
+            text-align: center;
+        }
+
+        .hljs-ln td {
+            padding-left: 1em
+        }
+
+        #markdown-body {
+            padding: 45px;
+        }
+
+        @media (max-width: 767px) {
+            #markdown-body {
+                padding: 15px
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" th:href="@{/}">PasteBin</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <form class="form-inline my-2 my-lg-0">
+            <div class="input-group">
+                <div class="input-group-prepend">
+                    <span class="input-group-text" id="basic-addon3"
+                          th:text="${#httpServletRequest.getRequestURL().substring(0, #httpServletRequest.getRequestURL().lastIndexOf(#httpServletRequest.getRequestURI()))}+'/'"></span>
+                </div>
+                <input type="text" class="form-control" id="basic-url" placeholder="pasteId"
+                       aria-describedby="basic-addon3">
+                <div class="input-group-append">
+                    <button class="btn btn-primary" type="button" id="button-go">前往</button>
+                </div>
+                <script>
+                    $("#button-go").click(function () {
+                        let baseUrl = document.getElementById("basic-url").value;
+                        window.location.href = document.getElementById("basic-addon3").innerText + baseUrl
+                    })
+                </script>
+            </div>
+        </form>
+    </div>
+</nav>
+<div class="container-fluid" style="padding-top: 20px;">
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10">
+
+            <div class="card">
+                <div class="card-header">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <span th:text="${paste.type}">Java</span> | <span
+                                th:text="${#dates.format(paste.createTime, 'yyyy-MM-dd HH:mm:ss')}"></span>
+                        </div>
+                        <div class="col-md-6" style="text-align: right;">
+                            <div class="custom-control custom-control-inline custom-switch">
+                                <input type="checkbox" class="custom-control-input" id="customSwitch2">
+                                <label class="custom-control-label" for="customSwitch2">源码</label>
+                                <script>
+                                    $("#customSwitch2").click(function () {
+                                        if(document.getElementById("customSwitch2").checked == true) {
+                                            document.getElementById("code-pre").style.display = "block"
+                                            document.getElementById("markdown-body").style.display = "none"
+                                        } else {
+                                            document.getElementById("code-pre").style.display = "none"
+                                            document.getElementById("markdown-body").style.display = "block"
+                                        }
+                                    })
+                                </script>
+                            </div>
+                            <a href="#" id="copy-btn" th:data-clipboard-text="${paste.content}">复制</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body" style="padding: 0px;">
+            <pre id="code-pre" style="margin-bottom: 0; display: none">
+              <code id="total-code" th:class="${paste.type.toLowerCase()}" style="background-color: #fff;"
+                    th:text="${paste.content}">public class PasteDo {
+
+  @Id
+  private String id;
+  private Date createTime;
+  private Date expireTime;
+  private Boolean needPass;
+  private String password;
+  private Boolean burn;
+  private Type type;
+  private String content;
+
+}
+              </code>
+            </pre>
+            <div id="markdown-body">
+
+            </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-1"></div>
+    </div>
+</div>
+<div style="background-color: #aaaaaa; height: 8%; margin-top: 30px;">
+    <div class="container-fluid" style="text-align: center; color: black;">
+        <a href="https://blog.guoziyang.top">Ziyang's Blog</a> | <a href="https://github.com/cn-guoziyang">Github</a> |
+        <a href="http://beian.miit.gov.cn/">苏ICP备20004712号</a>
+        <br>
+        Copyright © 2020 - <span id="year"></span> <a href="mailto:guoziyang0033@gmail.com">Ziyang</a>
+        <script>
+            var date = new Date()
+            var year = date.getFullYear()
+            document.getElementById("year").innerText = year
+        </script>
+    </div>
+</div>
+
+</body>
+<script>
+    var code = document.getElementById("total-code").innerText
+    var md = window.markdownit();
+    var result = md.render(code);
+    document.getElementById("markdown-body").innerHTML = result
+    console.log(md)
+    hljs.initHighlightingOnLoad();
+    hljs.initLineNumbersOnLoad();
+    var clipboard = new ClipboardJS('#copy-btn')
+    clipboard.on('success', function () {
+        alert("复制成功！")
+    })
+</script>
+
+</html>
